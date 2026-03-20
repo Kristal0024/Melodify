@@ -26,8 +26,8 @@ app.use('/music',musicRoutes)
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')))
 
-    // Handle SPA routing: redirect all other requests to index.html
-    app.get('/:path*', (req, res) => {
+    // Handle SPA routing: redirect all unhandled requests to index.html
+    app.use((req, res) => {
         res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'))
     })
 }
