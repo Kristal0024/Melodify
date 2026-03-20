@@ -11,16 +11,16 @@ const app=express()
 // CORS - allow frontend dev server and production origin
 app.use(cors({
     origin: process.env.NODE_ENV === 'production' 
-        ? process.env.FRONTEND_URL 
+        ? 'https://melodify-qpoy.onrender.com' 
         : 'http://localhost:5173',
     credentials: true
 }))
 app.use(express.json())
 app.use(cookieParser())
 
-// API Routes
-app.use('/auth',authRoutes)
-app.use('/music',musicRoutes)
+// API Routes (Prefixed with /api to match frontend expectations)
+app.use('/api/auth',authRoutes)
+app.use('/api/music',musicRoutes)
 
 // Serve Static Frontend for Deployment
 if (process.env.NODE_ENV === 'production') {
